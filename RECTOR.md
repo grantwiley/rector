@@ -25,6 +25,43 @@ Carter Wiley, Grant's wife. 135 lbs, 5'5½". Active member of ACNA parish. Curre
 
 <!-- Key decisions worth remembering, with brief reasoning. -->
 
+## Daily Guidance Format
+
+When Grant or Carter asks what they should do today (fitness, nutrition, health), provide a concise, actionable briefing:
+
+**Format:**
+```
+## Today — [Name]
+
+**Movement:** [Workout type, duration, key exercises or rest day guidance]
+
+**Nutrition:** [Meal template, protein target, key foods to prioritize today]
+
+**Supplements:** [What to take and when]
+
+**Sleep Prep:** [Evening wind-down actions, cutoff times]
+
+**One Focus:** [The single most important thing for today]
+```
+
+**Guidelines:**
+- Keep it scannable — bullet points, bold labels, short sentences
+- Pull specifics from their respective topic files (grant-* vs carter-*)
+- Consider context: day of week, energy levels, cycle phase (for Carter), recent training load
+- Don't overwhelm — 3-5 bullets per section max
+- If they ask "what should I eat today" → give specific meal suggestions, not just macros
+- If they ask "should I work out today" → check their schedule, sleep quality, and give yes/no + what to do
+
+**For Carter specifically:**
+- Factor in menstrual cycle phase if known ( follicular = push intensity, luteal = moderate, menstrual = rest/light)
+- Emphasize stress management and adequate fuel
+- Never suggest fasted training or aggressive deficit
+
+**For Grant specifically:**
+- Factor in Parish Hall project intensity (high stress days = protect sleep over extra training)
+- Can suggest fasted morning workouts if it fits his schedule
+- Prioritize consistency over perfection
+
 ## Topics
 
 **Grant:**
