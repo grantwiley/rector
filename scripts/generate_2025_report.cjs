@@ -221,153 +221,187 @@ function buildHTML(data) {
   const incSorted = Object.entries(incBySource).sort((a, b) => b[1] - a[1]);
   const merchantSorted = Object.entries(byMerchant).sort((a, b) => a[1].total - b[1].total).slice(0, 15);
 
-  // Monthly chart data (simple bar widths)
-  const maxMonthly = Math.max(...months.map(([, d]) => Math.max(d.income, Math.abs(d.expenses))));
+  // Consolidate merchants — group check-based categories together
+  const consolidatedMerchants = {};
+  Object.entries(byMerchant).forEach(([m, d]) => {
+    // Group individual checks by their category instead of check number
+    const key = m.startsWith("Check #") ? d.cat : m;
+    if (!consolidatedMerchants[key]) consolidatedMerchants[key] = { total: 0, count: 0, cat: d.cat };
+    consolidatedMerchants[key].total += d.total;
+    consolidatedMerchants[key].count += d.count;
+  });
+  const merchantSorted2 = Object.entries(consolidatedMerchants)
+    .filter(([m]) => m !== "Mortgage" && m !== "Tithe" && m !== "In-Laws (Rent/Phone/Etc)" && m !== "Checks (Other)" && m !== "Milk" && m !== "Haircut")
+    .sort((a, b) => a[1].total - b[1].total).slice(0, 12);
 
+  const maxMonthly = Math.max(...months.map(([, d]) => Math.max(d.income, Math.abs(d.expenses))));
   const monthNames = { "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
     "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec" };
+
+  // Font paths for Libertinus
+  const fontDir = "/Users/grantwiley/Library/Fonts";
 
   return `<!DOCTYPE html>
 <html>
 <head>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('file://${fontDir}/LibertinusSerif-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('file://${fontDir}/LibertinusSerif-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('file://${fontDir}/LibertinusSerif-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('file://${fontDir}/LibertinusSerif-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Libertinus Sans';
+    src: url('file://${fontDir}/LibertinusSans-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Libertinus Sans';
+    src: url('file://${fontDir}/LibertinusSans-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @page {
-    size: letter;
-    margin: 0;
-  }
+  @page { size: letter; margin: 0; }
 
   body {
-    font-family: 'EB Garamond', Georgia, serif;
+    font-family: 'Libertinus Serif', Georgia, 'Times New Roman', serif;
     background: #f5f2eb;
     color: #2d2d2d;
-    font-size: 11pt;
-    line-height: 1.55;
+    font-size: 10.5pt;
+    line-height: 1.5;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
   .page {
     width: 8.5in;
-    min-height: 11in;
-    padding: 1in 1.1in;
+    height: 11in;
+    padding: 0.75in 0.9in 0.65in;
     background: #f5f2eb;
     page-break-after: always;
     position: relative;
+    overflow: hidden;
   }
   .page:last-child { page-break-after: auto; }
 
-  /* Decorative top border */
   .page::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0.8in;
-    right: 0.8in;
-    height: 3px;
+    left: 0.6in;
+    right: 0.6in;
+    height: 2.5px;
     background: linear-gradient(90deg, transparent, #1a3d2e, #4a7c59, #1a3d2e, transparent);
   }
 
   h1 {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 28pt;
+    font-family: 'Libertinus Serif', Georgia, serif;
+    font-size: 26pt;
     font-weight: 600;
     color: #1a3d2e;
-    margin-bottom: 4pt;
-    letter-spacing: 0.02em;
+    margin-bottom: 2pt;
+    letter-spacing: 0.01em;
   }
 
   .subtitle {
-    font-family: 'Inter', 'Helvetica Neue', sans-serif;
-    font-size: 9pt;
+    font-family: 'Libertinus Sans', 'Helvetica Neue', sans-serif;
+    font-size: 8.5pt;
     color: #4a7c59;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    margin-bottom: 24pt;
+    letter-spacing: 0.14em;
+    font-weight: 400;
+    margin-bottom: 16pt;
   }
 
   h2 {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 16pt;
+    font-family: 'Libertinus Serif', Georgia, serif;
+    font-size: 15pt;
     font-weight: 600;
     color: #1a3d2e;
-    margin: 20pt 0 10pt;
-    padding-bottom: 4pt;
+    margin: 14pt 0 7pt;
+    padding-bottom: 3pt;
     border-bottom: 1.5px solid #4a7c59;
   }
+  h2:first-child { margin-top: 0; }
 
-  h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 10pt;
-    font-weight: 600;
-    color: #4a7c59;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 14pt 0 6pt;
-  }
-
-  /* Summary cards */
   .summary-row {
     display: flex;
-    gap: 16pt;
-    margin: 16pt 0;
+    gap: 12pt;
+    margin: 12pt 0 14pt;
   }
   .summary-card {
     flex: 1;
     background: white;
     border: 1px solid #d4cfbe;
-    border-radius: 6px;
-    padding: 14pt 16pt;
+    border-radius: 5px;
+    padding: 10pt 12pt;
     text-align: center;
   }
   .summary-card .label {
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 7.5pt;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #4a7c59;
-    font-weight: 500;
   }
   .summary-card .value {
-    font-size: 22pt;
+    font-size: 20pt;
     font-weight: 700;
     color: #1a3d2e;
-    margin-top: 4pt;
+    margin-top: 2pt;
   }
   .summary-card .sub {
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
-    color: #888;
-    margin-top: 2pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 7.5pt;
+    color: #999;
+    margin-top: 1pt;
   }
   .surplus .value { color: #2e7d32; }
 
-  /* Tables */
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 8pt 0;
-    font-size: 10pt;
+    margin: 5pt 0;
+    font-size: 9.5pt;
   }
   th {
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 7.5pt;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     color: #4a7c59;
-    font-weight: 600;
+    font-weight: 700;
     text-align: left;
-    padding: 6pt 8pt;
+    padding: 4pt 6pt;
     border-bottom: 1.5px solid #4a7c59;
   }
   th.right, td.right { text-align: right; }
   td {
-    padding: 5pt 8pt;
-    border-bottom: 1px solid #e8e4da;
+    padding: 3.5pt 6pt;
+    border-bottom: 0.5px solid #e8e4da;
     vertical-align: top;
   }
   tr:last-child td { border-bottom: none; }
@@ -376,93 +410,87 @@ function buildHTML(data) {
     border-top: 1.5px solid #1a3d2e;
     border-bottom: none;
     color: #1a3d2e;
-    padding-top: 8pt;
+    padding-top: 5pt;
   }
 
-  /* Bar chart */
-  .bar-chart { margin: 8pt 0; }
+  .bar-chart { margin: 5pt 0; }
   .bar-row {
     display: flex;
     align-items: center;
-    margin: 3pt 0;
-    font-size: 9pt;
+    margin: 2pt 0;
   }
   .bar-label {
-    width: 36pt;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 8pt;
+    width: 28pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-weight: 400;
+    font-size: 7.5pt;
     color: #666;
   }
   .bar-container {
     flex: 1;
     display: flex;
-    gap: 2pt;
-    height: 16pt;
+    gap: 1.5pt;
+    height: 13pt;
   }
   .bar-income {
     background: #4a7c59;
-    border-radius: 2px;
+    border-radius: 1.5px;
     height: 100%;
   }
   .bar-expense {
     background: #c17c53;
-    border-radius: 2px;
+    border-radius: 1.5px;
     height: 100%;
     opacity: 0.85;
   }
   .bar-net {
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
-    width: 56pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 7.5pt;
+    width: 48pt;
     text-align: right;
     color: #666;
-    font-weight: 500;
   }
   .bar-net.positive { color: #2e7d32; }
   .bar-net.negative { color: #c0392b; }
 
-  /* Legend */
   .legend {
     display: flex;
-    gap: 16pt;
-    margin: 6pt 0 2pt;
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
+    gap: 14pt;
+    margin: 4pt 0 2pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 7.5pt;
     color: #666;
   }
-  .legend-item { display: flex; align-items: center; gap: 4pt; }
-  .legend-dot {
-    width: 10pt;
-    height: 10pt;
-    border-radius: 2px;
-  }
-
-  .note {
-    font-family: 'Inter', sans-serif;
-    font-size: 8.5pt;
-    color: #777;
-    line-height: 1.5;
-    margin-top: 8pt;
-  }
+  .legend-item { display: flex; align-items: center; gap: 3pt; }
+  .legend-dot { width: 8pt; height: 8pt; border-radius: 1.5px; }
 
   .footer {
     position: absolute;
-    bottom: 0.7in;
-    left: 1.1in;
-    right: 1.1in;
+    bottom: 0.45in;
+    left: 0.9in;
+    right: 0.9in;
     text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 7pt;
-    color: #aaa;
-    border-top: 1px solid #ddd;
-    padding-top: 6pt;
+    font-family: 'Libertinus Sans', sans-serif;
+    font-size: 6.5pt;
+    color: #bbb;
+    border-top: 0.5px solid #ddd;
+    padding-top: 4pt;
+  }
+
+  .obs-item { margin-bottom: 6pt; }
+  .obs-label {
+    font-weight: 700;
+    color: #1a3d2e;
+  }
+  .obs-text {
+    color: #555;
+    font-size: 9.5pt;
   }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1: Overview -->
+<!-- PAGE 1: Overview + Income -->
 <div class="page">
   <h1>2025 Financial Overview</h1>
   <div class="subtitle">Grant & Carter Wiley · Rockingham County, VA</div>
@@ -519,7 +547,7 @@ function buildHTML(data) {
   <div class="footer">Generated by Rector · ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
 </div>
 
-<!-- PAGE 2: Expenses -->
+<!-- PAGE 2: Expense Breakdown -->
 <div class="page">
   <h2>Expense Breakdown</h2>
   <table>
@@ -530,19 +558,19 @@ function buildHTML(data) {
     <tr class="total-row"><td>Total</td><td class="right">${fmtC(totalExp)}</td><td class="right">${fmt(totalExp / 12)}</td><td class="right">${catSorted.reduce((s, [, d]) => s + d.count, 0)}</td><td class="right">100%</td></tr>
   </table>
 
-  <h2>Top 15 Merchants</h2>
+  <div class="footer">Generated by Rector · ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+</div>
+
+<!-- PAGE 3: Top Merchants + Monthly Detail -->
+<div class="page">
+  <h2>Top Merchants</h2>
   <table>
     <tr><th>Merchant</th><th>Category</th><th class="right">Annual</th><th class="right">Txns</th></tr>
-    ${merchantSorted.map(([m, d]) =>
+    ${merchantSorted2.map(([m, d]) =>
       `<tr><td>${m}</td><td>${d.cat}</td><td class="right">${fmtC(d.total)}</td><td class="right">${d.count}</td></tr>`
     ).join("\n")}
   </table>
 
-  <div class="footer">Generated by Rector · ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-</div>
-
-<!-- PAGE 3: Monthly Detail -->
-<div class="page">
   <h2>Monthly Detail</h2>
   <table>
     <tr><th>Month</th><th class="right">Income</th><th class="right">Expenses</th><th class="right">Net</th><th class="right">Savings Rate</th></tr>
@@ -560,16 +588,52 @@ function buildHTML(data) {
     </tr>
   </table>
 
+  <div class="footer">Generated by Rector · ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+</div>
+
+<!-- PAGE 4: Key Observations -->
+<div class="page">
   <h2>Key Observations</h2>
-  <table>
-    <tr><th style="width:30%">Finding</th><th>Detail</th></tr>
-    <tr><td><strong>Amazon spending</strong></td><td>${fmt(Math.abs(expByCat["Amazon"]?.total || 0))}/yr (${fmt(Math.abs((expByCat["Amazon"]?.total || 0) / 12))}/mo) across ${expByCat["Amazon"]?.count || 0} orders. Averages ~$${Math.abs((expByCat["Amazon"]?.total || 0) / (expByCat["Amazon"]?.count || 1)).toFixed(0)}/order — likely includes household essentials mixed with discretionary.</td></tr>
-    <tr><td><strong>Tithe consistency</strong></td><td>${fmt(Math.abs(expByCat["Tithe"]?.total || 0))}/yr to Church of the Lamb via weekly $200 checks${expByCat["Giving (Church)"]?.total ? `, plus ${fmt(Math.abs(expByCat["Giving (Church)"]?.total))} in direct giving` : ""}.</td></tr>
-    <tr><td><strong>Groceries</strong></td><td>${fmt(Math.abs(expByCat["Groceries"]?.total || 0))}/yr (${fmt(Math.abs((expByCat["Groceries"]?.total || 0) / 12))}/mo) across Kroger, Costco, City Food Co-Op, and others. Includes Costco bulk runs.</td></tr>
-    <tr><td><strong>Strongest months</strong></td><td>${months.filter(([, d]) => d.income + d.expenses > 3000).map(([m]) => monthNames[m.split("-")[1]]).join(", ") || "None"} — months with highest surplus.</td></tr>
-    <tr><td><strong>Tightest months</strong></td><td>${months.filter(([, d]) => d.income + d.expenses < 1000).map(([m]) => monthNames[m.split("-")[1]]).join(", ") || "None"} — watch for travel or large purchases.</td></tr>
-    <tr><td><strong>Surplus</strong></td><td>+${fmt(net)}/yr (+${fmt(net / 12)}/mo) — a ${(net / totalInc * 100).toFixed(0)}% savings rate. Room to build emergency fund and begin investing.</td></tr>
-  </table>
+
+  <div class="obs-item">
+    <span class="obs-label">Surplus: </span>
+    <span class="obs-text">+${fmt(net)}/yr (+${fmt(net / 12)}/mo) at a ${(net / totalInc * 100).toFixed(0)}% savings rate. This is strong — enough to build an emergency fund and begin investing if directed intentionally.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Amazon: </span>
+    <span class="obs-text">${fmt(Math.abs(expByCat["Amazon"]?.total || 0))}/yr (${fmt(Math.abs((expByCat["Amazon"]?.total || 0) / 12))}/mo) across ${expByCat["Amazon"]?.count || 0} orders, averaging ~$${Math.abs((expByCat["Amazon"]?.total || 0) / (expByCat["Amazon"]?.count || 1)).toFixed(0)}/order. A mix of household essentials and discretionary spending — hard to separate without item-level data. A monthly cap of $400–500 would save $1,500–2,800/yr.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Tithe & Giving: </span>
+    <span class="obs-text">${fmt(Math.abs((expByCat["Tithe"]?.total || 0) + (expByCat["Giving (Church)"]?.total || 0)))}/yr combined — ${fmt(Math.abs(expByCat["Tithe"]?.total || 0))} via weekly $200 checks${expByCat["Giving (Church)"]?.total ? ` plus ${fmt(Math.abs(expByCat["Giving (Church)"]?.total))} in direct church giving` : ""}. Consistent and intentional.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Groceries: </span>
+    <span class="obs-text">${fmt(Math.abs(expByCat["Groceries"]?.total || 0))}/yr (${fmt(Math.abs((expByCat["Groceries"]?.total || 0) / 12))}/mo) across Kroger, Costco, City Food Co-Op, Food Lion, and others. Costco bulk runs inflate some months. Reasonable for two people, but some Costco trips may include non-food items.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Housing: </span>
+    <span class="obs-text">Mortgage (${fmt(Math.abs(expByCat["Mortgage"]?.total || 0))}/yr) plus in-laws payment (${fmt(Math.abs(expByCat["In-Laws (Rent/Phone/Etc)"]?.total || 0))}/yr) totals ~${fmt(Math.abs((expByCat["Mortgage"]?.total || 0) + (expByCat["In-Laws (Rent/Phone/Etc)"]?.total || 0)))}/yr in housing costs, or about ${(Math.abs((expByCat["Mortgage"]?.total || 0) + (expByCat["In-Laws (Rent/Phone/Etc)"]?.total || 0)) / totalInc * 100).toFixed(0)}% of gross income.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Uncategorized: </span>
+    <span class="obs-text">${fmt(Math.abs(expByCat["Other"]?.total || 0))}/yr (${expByCat["Other"]?.count || 0} transactions) still lack proper categorization. These are one-off merchants not yet mapped — continued cleanup will sharpen the picture.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Strongest months: </span>
+    <span class="obs-text">${months.filter(([, d]) => d.income + d.expenses > 3000).map(([m]) => monthNames[m.split("-")[1]]).join(", ") || "None"} — driven by extra paychecks or lower-than-usual spending.</span>
+  </div>
+
+  <div class="obs-item">
+    <span class="obs-label">Tightest months: </span>
+    <span class="obs-text">${months.filter(([, d]) => d.income + d.expenses < 1000).map(([m]) => monthNames[m.split("-")[1]]).join(", ") || "None"} — typically months with travel, large home purchases, or irregular expenses.</span>
+  </div>
 
   <div class="footer">Generated by Rector · ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
 </div>
