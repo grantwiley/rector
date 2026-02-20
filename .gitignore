@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Monarch session (contains auth token)
+.mm/
+.monarch-session/
+
+# Financial data (sensitive)
+data/
+
+# Environment
+.env

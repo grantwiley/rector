@@ -23,7 +23,10 @@ Grant Wiley, 24 (born Aug 4, 2001). Married, two dogs, hoping to have kids soon.
 
 ## Topics
 
-- [Fitness](topics/fitness.md) — training goals, program, and progress
+- [Fitness](topics/fitness.md) — training goals, program, and progress (includes Huberman protocols)
+- [Health](topics/health.md) — sleep, nutrition, light exposure, supplements, protocols (Huberman)
+- [Nutrition](topics/nutrition.md) — comprehensive nutrition guidelines (Huberman protocols)
 - [Finances](topics/finances.md) — savings, investing, budgeting
-- [Parish Hall](topics/parish-hall.md) — MVP roadmap, tech stack, decisions
-- [SCL](topics/scl.md) — day job context, projects, responsibilities
+- [Parish Hall](topics/parish-hall.md) — MVP roadmap, tech stack, decisions (parishhall.org)
+- [SCL](topics/scl.md) — day job context, projects, responsibilities (societyforclassicallearning.org)
+- [Style](topics/style.md) — typography, colors, design system for documents/PDFs
