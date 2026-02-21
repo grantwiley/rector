@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carter's Weekly Plan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background: #f5f2eb;
+            color: #2d2d2d;
+            line-height: 1.5;
+            padding: 0.5in;
+            width: 8.5in;
+            height: 11in;
+        }
+        
+        .page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            text-align: center;
+            border-bottom: 2px solid #1a3d2e;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-size: 28pt;
+            font-weight: 700;
+            color: #1a3d2e;
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+        }
+        
+        .subtitle {
+            font-size: 11pt;
+            color: #4a7c59;
+            font-style: italic;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 12px 0;
+            font-size: 10pt;
+            color: #4a7c59;
+        }
+        
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+        
+        .day-card {
+            background: white;
+            border: 1px solid #4a7c59;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        
+        .day-name {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a3d2e;
+            text-align: center;
+            border-bottom: 1px solid #c17c53;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .day-focus {
+            font-size: 8pt;
+            font-weight: 600;
+            color: #c17c53;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        
+        .day-content {
+            font-size: 7.5pt;
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        .day-content strong {
+            color: #1a3d2e;
+            display: block;
+            margin-top: 4px;
+        }
+        
+        .day-content strong:first-child {
+            margin-top: 0;
+        }
+        
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            border-top: 2px solid #1a3d2e;
+            padding-top: 12px;
+        }
+        
+        .section {
+            background: white;
+            border: 1px solid #4a7c59;
+            padding: 10px;
+        }
+        
+        .section h3 {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a3d2e;
+            border-bottom: 1px solid #c17c53;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .section ul {
+            font-size: 8pt;
+            line-height: 1.5;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .section li {
+            margin-bottom: 3px;
+        }
+        
+        .section li::before {
+            content: "•";
+            color: #c17c53;
+            margin-right: 6px;
+        }
+        
+        .targets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 8pt;
+        }
+        
+        .target-box {
+            background: #f5f2eb;
+            padding: 6px;
+            border-left: 2px solid #4a7c59;
+        }
+        
+        .target-label {
+            font-weight: 600;
+            color: #1a3d2e;
+        }
+        
+        .fertility-note {
+            background: #f5f2eb;
+            border-left: 3px solid #c17c53;
+            padding: 6px 8px;
+            margin-top: 6px;
+            font-size: 7.5pt;
+            font-style: italic;
+            color: #4a7c59;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Carter's Weekly Plan</h1>
+            <div class="subtitle">Fertility Focused &middot; Cycle Aware &middot; Nourish First</div>
+            <div class="stats">
+                <span>135 lbs</span>
+                <span>5'5½"</span>
+                <span>Maintain & Build</span>
+                <span>Protein: 80-110g</span>
+            </div>
+        </header>
+        
+        <div class="week-grid">
+            <div class="day-card">
+                <div class="day-name">Sunday</div>
+                <div class="day-focus">Full Body Strength</div>
+                <div class="day-content">
+                    <strong>Training:</strong> 45-50 min compound lifts<br>
+                    <strong>Core:</strong> 360° breathing, dead bug, bird dog<br>
+                    <strong>Pelvic Floor:</strong> Gentle activation work<br>
+                    <strong>Fuel:</strong> Eat breakfast before!
+                </div>
+                <div class="fertility-note">Adjust to cycle phase</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Monday</div>
+                <div class="day-focus">Zone 2 Cardio</div>
+                <div class="day-content">
+                    <strong>Movement:</strong> 30-40 min walk, bike, or swim<br>
+                    <strong>Pace:</strong> Conversational (can talk)<br>
+                    <strong>Benefits:</strong> Insulin sensitivity, stress relief<br>
+                    <strong>Optional:</strong> Walk with Grant
+                </div>
+                <div class="fertility-note">Never fasted — eat first!</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Tuesday</div>
+                <div class="day-focus">Rest / Yoga</div>
+                <div class="day-content">
+                    <strong>Focus:</strong> Pelvic floor PT exercises<br>
+                    <strong>Mobility:</strong> Hip openers, 90/90 switches<br>
+                    <strong>Stress:</strong> 10 min meditation or prayer<br>
+                    <strong>Sleep:</strong> Aim for 9 hrs
+                </div>
+                <div class="fertility-note">Rest is hormone recovery</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Wednesday</div>
+                <div class="day-focus">Upper Body & Core</div>
+                <div class="day-content">
+                    <strong>Training:</strong> 40-45 min push/pull<br>
+                    <strong>Core:</strong> Side plank, glute bridges<br>
+                    <strong>Exercises:</strong> Rows, press, face pulls<br>
+                    <strong>Post:</strong> 25-30g protein within 2 hrs
+                </div>
+                <div class="fertility-note">Moderate intensity luteal phase</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Thursday</div>
+                <div class="day-focus">Zone 2 / Rest</div>
+                <div class="day-content">
+                    <strong>Movement:</strong> 20-30 min optional<br>
+                    <strong>Or:</strong> Complete rest day<br>
+                    <strong>Active:</strong> Gentle stretching only<br>
+                    <strong>Check:</strong> Energy levels, cycle day
+                </div>
+                <div class="fertility-note">Listen to your body</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Friday</div>
+                <div class="day-focus">Lower Body & Glutes</div>
+                <div class="day-content">
+                    <strong>Training:</strong> 45-50 min legs/hips<br>
+                    <strong>Focus:</strong> Squat/hinge patterns<br>
+                    <strong>Include:</strong> Hip thrusts, step-ups<br>
+                    <strong>Core:</strong> Farmer carries, Pallof press
+                </div>
+                <div class="fertility-note">Labor prep foundation</div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-name">Saturday</div>
+                <div class="day-focus">Complete Rest</div>
+                <div class="day-content">
+                    <strong>Sabbath:</strong> Prayer, worship, restoration<br>
+                    <strong>Movement:</strong> Optional gentle walk<br>
+                    <strong>Sleep:</strong> Prioritize 9 hrs<br>
+                    <strong>Prep:</strong> Meal prep for week
+                </div>
+                <div class="fertility-note">Stress management day</div>
+            </div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="section">
+                <h3>Daily Supplements</h3>
+                <ul>
+                    <li>Morning: Prenatal with methylfolate, Vitamin D3, Omega-3 (DHA)</li>
+                    <li>Morning: CoQ10 100-200mg (ubiquinol), Creatine 3-5g</li>
+                    <li>Post-workout: Protein 25-30g + carbs</li>
+                    <li>Evening: Magnesium glycinate 200-400mg, Myo-inositol 2-4g</li>
+                    <li>Optional: Ashwagandha 300-600mg AM</li>
+                </ul>
+                <div class="fertility-note" style="margin-top: 4px;">Stop adaptogens once pregnant — confirm with doctor</div>
+            </div>
+            
+            <div class="section">
+                <h3>Fertility Nutrition</h3>
+                <ul>
+                    <li>Eggs daily: 2-3 (choline for fetal brain)</li>
+                    <li>Liver weekly: 3-4 oz (iron, B12, folate, retinol)</li>
+                    <li>Fatty fish: 3-4x/week (salmon, sardines)</li>
+                    <li>Fermented foods: Daily (sauerkraut, kefir)</li>
+                    <li>Brazil nuts: 2-3/day (selenium for thyroid)</li>
+                    <li>Leafy greens: 2-3 cups daily (folate)</li>
+                </ul>
+                <div class="targets">
+                    <div class="target-box">
+                        <div class="target-label">Protein</div>
+                        80-110g/day
+                    </div>
+                    <div class="target-box">
+                        <div class="target-label">Calories</div>
+                        Maintenance
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Sleep & Cycle</h3>
+                <ul>
+                    <li>Sleep: 8-9 hours (women need more for hormones)</li>
+                    <li>Sunlight within 30-60 min of waking</li>
+                    <li>Caffeine: <200mg, stop by 2pm</li>
+                    <li>Alcohol: Eliminate completely</li>
+                    <li>Track cycle: BBT, cervical mucus, OPKs</li>
+                    <li>Luteal phase: Cooler room, limit fluids pre-bed</li>
+                </ul>
+                <div class="targets" style="margin-top: 6px;">
+                    <div class="target-box">
+                        <div class="target-label">Hydration</div>
+                        80 oz/day
+                    </div>
+                    <div class="target-box">
+                        <div class="target-label">Zone 2</div>
+                        120-150 min/wk
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
