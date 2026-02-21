@@ -17,8 +17,8 @@
             font-family: 'EB Garamond', Georgia, serif;
             background: #f5f2eb;
             color: #2d2d2d;
-            line-height: 1.5;
-            padding: 0.5in;
+            line-height: 1.3;
+            padding: 0.4in;
             width: 8.5in;
             height: 11in;
         }
@@ -33,20 +33,20 @@
         header {
             text-align: center;
             border-bottom: 2px solid #1a3d2e;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         h1 {
-            font-size: 28pt;
+            font-size: 22pt;
             font-weight: 700;
             color: #1a3d2e;
             letter-spacing: 0.02em;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         
         .subtitle {
-            font-size: 11pt;
+            font-size: 9pt;
             color: #4a7c59;
             font-style: italic;
         }
@@ -54,128 +54,157 @@
         .stats {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin: 12px 0;
-            font-size: 10pt;
+            gap: 24px;
+            margin: 6px 0 0 0;
+            font-size: 8pt;
             color: #4a7c59;
         }
         
-        .week-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            flex: 1;
-            margin-bottom: 16px;
+        .week-section {
+            margin-bottom: 10px;
         }
         
-        .day-card {
-            background: white;
+        .week-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7.5pt;
+        }
+        
+        .week-table th {
+            background: #1a3d2e;
+            color: #f5f2eb;
+            padding: 4px 6px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 8pt;
+            border: 1px solid #1a3d2e;
+        }
+        
+        .week-table td {
+            padding: 5px 6px;
             border: 1px solid #4a7c59;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
+            background: white;
+            vertical-align: top;
+            line-height: 1.4;
         }
         
         .day-name {
-            font-size: 10pt;
             font-weight: 600;
             color: #1a3d2e;
-            text-align: center;
+            font-size: 8pt;
+            display: block;
+            margin-bottom: 2px;
             border-bottom: 1px solid #c17c53;
-            padding-bottom: 4px;
-            margin-bottom: 6px;
+            padding-bottom: 1px;
         }
         
         .day-focus {
-            font-size: 8pt;
-            font-weight: 600;
             color: #c17c53;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        
-        .day-content {
-            font-size: 7.5pt;
-            line-height: 1.4;
-            flex: 1;
-        }
-        
-        .day-content strong {
-            color: #1a3d2e;
-            display: block;
-            margin-top: 4px;
-        }
-        
-        .day-content strong:first-child {
-            margin-top: 0;
-        }
-        
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            border-top: 2px solid #1a3d2e;
-            padding-top: 12px;
-        }
-        
-        .section {
-            background: white;
-            border: 1px solid #4a7c59;
-            padding: 10px;
-        }
-        
-        .section h3 {
-            font-size: 10pt;
             font-weight: 600;
-            color: #1a3d2e;
-            border-bottom: 1px solid #c17c53;
-            padding-bottom: 4px;
-            margin-bottom: 6px;
-        }
-        
-        .section ul {
-            font-size: 8pt;
-            line-height: 1.5;
-            list-style: none;
-            padding: 0;
-        }
-        
-        .section li {
+            font-size: 7pt;
+            display: block;
             margin-bottom: 3px;
         }
         
-        .section li::before {
-            content: "•";
-            color: #c17c53;
-            margin-right: 6px;
+        .day-content {
+            font-size: 7pt;
+            line-height: 1.35;
         }
         
-        .targets {
+        .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 8px;
-            font-size: 8pt;
+            gap: 10px;
+            flex: 1;
+            margin-top: 10px;
         }
         
-        .target-box {
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .info-box {
+            background: white;
+            border: 1px solid #4a7c59;
+            padding: 8px;
+        }
+        
+        .info-box h3 {
+            font-size: 9pt;
+            font-weight: 700;
+            color: #1a3d2e;
+            border-bottom: 1px solid #c17c53;
+            padding-bottom: 3px;
+            margin-bottom: 5px;
+        }
+        
+        .info-box ul {
+            font-size: 7.5pt;
+            line-height: 1.45;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .info-box li {
+            margin-bottom: 2px;
+            padding-left: 10px;
+            position: relative;
+        }
+        
+        .info-box li::before {
+            content: "•";
+            color: #c17c53;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-box {
             background: #f5f2eb;
-            padding: 6px;
+            border-left: 2px solid #c17c53;
+            padding: 5px 8px;
+            margin-top: 5px;
+            font-size: 7pt;
+        }
+        
+        .highlight-label {
+            font-weight: 600;
+            color: #1a3d2e;
+        }
+        
+        .targets-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .target-item {
+            flex: 1;
+            background: #f5f2eb;
+            padding: 4px 6px;
+            font-size: 7pt;
             border-left: 2px solid #4a7c59;
         }
         
-        .target-label {
+        .checklist {
+            font-size: 7pt;
+            line-height: 1.5;
+        }
+        
+        .checklist-item {
+            margin-bottom: 2px;
+        }
+        
+        .section-title {
             font-weight: 600;
             color: #1a3d2e;
         }
         
         @media print {
             body {
-                padding: 0;
-            }
-            .page {
-                page-break-after: always;
+                padding: 0.35in;
             }
         }
     </style>
@@ -184,145 +213,150 @@
     <div class="page">
         <header>
             <h1>Grant's Weekly Plan</h1>
-            <div class="subtitle">Huberman Protocols &middot; Strength &middot; Zone 2 &middot; Longevity</div>
+            <div class="subtitle">Huberman Protocols · Strength · Zone 2 · Longevity</div>
             <div class="stats">
-                <span>210 lbs</span>
-                <span>6'0"</span>
-                <span>Goal: 165 lbs</span>
-                <span>Protein: 130-210g</span>
+                <span>210 lbs · 6'0" · Goal: 165 lbs</span>
+                <span>Protein: 130-210g · Zone 2: 180-200 min/wk</span>
             </div>
         </header>
         
-        <div class="week-grid">
-            <div class="day-card">
-                <div class="day-name">Sunday</div>
-                <div class="day-focus">Zone 2 Cardio</div>
-                <div class="day-content">
-                    <strong>Training:</strong> 30-75 min Zone 2 (bike, ruck, jog, swim)<br>
-                    <strong>Notes:</strong> Conversational pace. 180-200 min Zone 2 total/week.<br>
-                    <strong>Sleep:</strong> Sunlight AM, dim lights PM
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Monday</div>
-                <div class="day-focus">Legs Strength</div>
-                <div class="day-content">
-                    <strong>Training:</strong> Legs resistance (Schedule A or B)<br>
-                    <strong>Warmup:</strong> 10 min mobility<br>
-                    <strong>Work:</strong> 50-60 min max<br>
-                    <strong>Post:</strong> 40g whey protein
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Tuesday</div>
-                <div class="day-focus">Active Recovery</div>
-                <div class="day-content">
-                    <strong>Movement:</strong> Light walk, yoga, mobility<br>
-                    <strong>Optional:</strong> 10 min stability work<br>
-                    <strong>Focus:</strong> Turkish get-ups, hip mobility<br>
-                    <strong>Sleep:</strong> Prioritize 8 hrs
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Wednesday</div>
-                <div class="day-focus">Torso & Neck</div>
-                <div class="day-content">
-                    <strong>Training:</strong> Chest, back, shoulders, neck<br>
-                    <strong>Warmup:</strong> 10 min<br>
-                    <strong>Volume:</strong> Indirect arm training<br>
-                    <strong>Post:</strong> 3-5 min downregulation breathing
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Thursday</div>
-                <div class="day-focus">HIIT / VO2 Max</div>
-                <div class="day-content">
-                    <strong>Training:</strong> 20-30 min intervals<br>
-                    <strong>4×4 Protocol:</strong> 4 min hard / 4 min easy × 4-6<br>
-                    <strong>Or:</strong> 20-30 min total hard work<br>
-                    <strong>Cooldown:</strong> 5-10 min easy
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Friday</div>
-                <div class="day-focus">Arms & Abs</div>
-                <div class="day-content">
-                    <strong>Training:</strong> Biceps, triceps, calves, neck, abs<br>
-                    <strong>Structure:</strong> Shortened + lengthened positions<br>
-                    <strong>Reps:</strong> 8-15 per set<br>
-                    <strong>Rest:</strong> 90 sec between sets
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <div class="day-name">Saturday</div>
-                <div class="day-focus">Rest Day</div>
-                <div class="day-content">
-                    <strong>Movement:</strong> Optional gentle walk<br>
-                    <strong>Spiritual:</strong> Prayer, Scripture, Lectio Divina<br>
-                    <strong>Sleep:</strong> Aim for 8-9 hrs<br>
-                    <strong>Prep:</strong> Plan next week, meal prep
-                </div>
-            </div>
+        <div class="week-section">
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th style="width: 14%">Sunday</th>
+                        <th style="width: 14%">Monday</th>
+                        <th style="width: 14%">Tuesday</th>
+                        <th style="width: 14%">Wednesday</th>
+                        <th style="width: 14%">Thursday</th>
+                        <th style="width: 14%">Friday</th>
+                        <th style="width: 16%">Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="day-focus">Zone 2 Cardio</span>
+                            <div class="day-content">
+                                30-75 min conversational pace. Bike, ruck, jog, or swim. Target 180-200 min Zone 2 total this week.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">Legs Strength</span>
+                            <div class="day-content">
+                                <strong>Warmup:</strong> 10 min mobility<br>
+                                <strong>Work:</strong> 50-60 min legs resistance (Schedule A/B)<br>
+                                <strong>Post:</strong> 40g whey protein within 1 hr
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">Active Recovery</span>
+                            <div class="day-content">
+                                Light walk, yoga, or mobility work. Optional: 10 min stability (Turkish get-ups, hip mobility). Prioritize 8 hrs sleep.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">Torso & Neck</span>
+                            <div class="day-content">
+                                <strong>Warmup:</strong> 10 min<br>
+                                <strong>Work:</strong> Chest, back, shoulders, neck<br>
+                                <strong>Post:</strong> 3-5 min downregulation breathing
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">HIIT / VO2 Max</span>
+                            <div class="day-content">
+                                20-30 min intervals. <strong>4×4 Protocol:</strong> 4 min hard / 4 min easy × 4-6 rounds. RPE 8-9/10.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">Arms & Abs</span>
+                            <div class="day-content">
+                                Biceps, triceps, calves, neck, abs. Alternate shortened/lengthened positions. 8-15 reps, 90 sec rest.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="day-focus">Rest Day</span>
+                            <div class="day-content">
+                                Optional gentle walk. Prayer, Scripture reading, Lectio Divina. Aim 8-9 hrs sleep. Plan next week, meal prep.
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
-        <div class="bottom-section">
-            <div class="section">
-                <h3>Daily Supplements</h3>
-                <ul>
-                    <li>Morning: Creatine 5g, Omega-3 1-2g, Vitamin D</li>
-                    <li>Pre-workout: Alpha-GPC 300mg, L-Tyrosine 500mg, Caffeine 100-200mg</li>
-                    <li>Post-workout: Whey protein 40g</li>
-                    <li>Evening: Magnesium 200-400mg, Apigenin 50mg, Theanine 200mg</li>
-                    <li>Optional: Tongkat Ali 400mg AM, Fadogia 425mg AM</li>
-                </ul>
-            </div>
-            
-            <div class="section">
-                <h3>Weekly Targets</h3>
-                <ul>
-                    <li>Zone 2 cardio: 180-200 min total</li>
-                    <li>Strength training: 3-4 sessions</li>
-                    <li>VO2 max: 20-30 min total</li>
-                    <li>Stability: 10 min daily minimum</li>
-                    <li>Cold exposure: 11 min total (2-4 sessions)</li>
-                    <li>Sauna: 57 min total (3-4 sessions)</li>
-                </ul>
-                <div class="targets">
-                    <div class="target-box">
-                        <div class="target-label">Protein</div>
-                        130-210g/day
-                    </div>
-                    <div class="target-box">
-                        <div class="target-label">Fiber</div>
-                        25g+ daily
+        <div class="two-column">
+            <div class="column">
+                <div class="info-box">
+                    <h3>Daily Supplements</h3>
+                    <ul>
+                        <li><strong>Morning:</strong> Creatine 5g, Omega-3 1-2g EPA+DHA, Vitamin D 2-5K IU</li>
+                        <li><strong>Pre-workout (30-60 min):</strong> Alpha-GPC 300mg, L-Tyrosine 500mg, Caffeine 100-200mg</li>
+                        <li><strong>Post-workout:</strong> Whey protein 40g</li>
+                        <li><strong>Evening (30-60 min before bed):</strong> Magnesium 200-400mg, Apigenin 50mg, Theanine 200mg</li>
+                        <li><strong>Optional:</strong> Tongkat Ali 400mg AM, Fadogia Agrestis 425mg AM (cycle 8 on/2 off)</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Weekly Training Targets</h3>
+                    <div class="checklist">
+                        <div class="checklist-item"><span class="section-title">Zone 2 Cardio:</span> 180-200 min total</div>
+                        <div class="checklist-item"><span class="section-title">Strength Training:</span> 3-4 sessions (50-60 min max)</div>
+                        <div class="checklist-item"><span class="section-title">VO2 Max:</span> 20-30 min hard work (1-2 sessions)</div>
+                        <div class="checklist-item"><span class="section-title">Stability:</span> 10 min daily minimum</div>
+                        <div class="checklist-item"><span class="section-title">Cold Exposure:</span> 11 min total (2-4 sessions)</div>
+                        <div class="checklist-item"><span class="section-title">Sauna:</span> 57 min total (3-4 sessions × 15-20 min)</div>
+                        <div class="checklist-item"><span class="section-title">Stretching:</span> 5 min per muscle group weekly</div>
                     </div>
                 </div>
             </div>
             
-            <div class="section">
-                <h3>Sleep Protocol</h3>
-                <ul>
-                    <li>Sunlight within 30-60 min of waking (10-30 min)</li>
-                    <li>Caffeine cutoff: 8-10 hours before bed</li>
-                    <li>Dim lights after sunset</li>
-                    <li>No bright/overhead lights 10pm-4am</li>
-                    <li>Cool room: 65-68°F</li>
-                    <li>Same bedtime nightly (consistency > duration)</li>
-                </ul>
-                <div class="targets" style="margin-top: 6px;">
-                    <div class="target-box">
-                        <div class="target-label">Hydration</div>
-                        80 oz/10 hrs
+            <div class="column">
+                <div class="info-box">
+                    <h3>Sleep Protocol</h3>
+                    <ul>
+                        <li><strong>Morning:</strong> Sunlight 10-30 min within 30-60 min of waking</li>
+                        <li><strong>Evening:</strong> Dim lights after sunset, no bright/overhead lights 10pm-4am</li>
+                        <li><strong>Caffeine:</strong> Cutoff 8-10 hours before bedtime</li>
+                        <li><strong>Environment:</strong> Cool room (65-68°F), complete darkness, no screens 1 hr before bed</li>
+                        <li><strong>Consistency:</strong> Same wake time daily (consistency > exact duration)</li>
+                        <li><strong>Supplements:</strong> Magnesium + Apigenin + Theanine 30-60 min pre-bed</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Daily Nutrition Targets</h3>
+                    <div class="targets-row">
+                        <div class="target-item">
+                            <span class="highlight-label">Protein:</span> 130-210g (0.6-1g/lb)
+                        </div>
+                        <div class="target-item">
+                            <span class="highlight-label">Fiber:</span> 25g+ minimum
+                        </div>
                     </div>
-                    <div class="target-box">
-                        <div class="target-label">Fermented</div>
-                        2+ servings
+                    <div class="targets-row">
+                        <div class="target-item">
+                            <span class="highlight-label">Hydration:</span> 80 oz/10 hrs
+                        </div>
+                        <div class="target-item">
+                            <span class="highlight-label">Fermented:</span> 2+ servings
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top: 6px;">
+                        <span class="highlight-label">Fasted Training:</span> OK for Grant (coffee + electrolytes before noon). If afternoon crashes, delay caffeine 90-120 min after waking.
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Quick Reference</h3>
+                    <div class="checklist" style="font-size: 7pt;">
+                        <div class="checklist-item"><span class="section-title">Workout max:</span> 50-60 minutes</div>
+                        <div class="checklist-item"><span class="section-title">Post-workout breathing:</span> 3-5 min physiological sighs</div>
+                        <div class="checklist-item"><span class="section-title">Cold timing:</strong> Not within 4-6 hrs of strength training</div>
+                        <div class="checklist-item"><span class="section-title">Zone 2 test:</span> Can hold conversation</div>
+                        <div class="checklist-item"><span class="section-title">Rest day:</span> Prayer, Scripture, complete rest acceptable</div>
                     </div>
                 </div>
             </div>
