@@ -18,9 +18,10 @@
             background: #f5f2eb;
             color: #2d2d2d;
             line-height: 1.35;
-            padding: 0.35in;
+            padding: 0.3in;
             width: 8.5in;
             height: 11in;
+            overflow: hidden;
         }
         
         .page {
@@ -33,20 +34,20 @@
         header {
             text-align: center;
             border-bottom: 2px solid #1a3d2e;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         h1 {
-            font-size: 26pt;
+            font-size: 22pt;
             font-weight: 700;
             color: #1a3d2e;
             letter-spacing: 0.02em;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         
         .subtitle {
-            font-size: 10pt;
+            font-size: 9pt;
             color: #4a7c59;
             font-style: italic;
         }
@@ -54,94 +55,95 @@
         .stats {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin: 8px 0 0 0;
-            font-size: 9pt;
+            gap: 28px;
+            margin: 6px 0 0 0;
+            font-size: 8pt;
             color: #4a7c59;
         }
         
         .week-section {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .week-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9pt;
+            font-size: 8pt;
         }
         
         .week-table th {
             background: #1a3d2e;
             color: #f5f2eb;
-            padding: 5px 8px;
+            padding: 4px 6px;
             text-align: left;
             font-weight: 600;
-            font-size: 10pt;
+            font-size: 9pt;
             border: 1px solid #1a3d2e;
         }
         
         .week-table td {
-            padding: 8px;
+            padding: 6px;
             border: 1px solid #4a7c59;
             background: white;
             vertical-align: top;
-            line-height: 1.45;
+            line-height: 1.35;
         }
         
         .day-focus {
             color: #c17c53;
             font-weight: 600;
-            font-size: 9pt;
+            font-size: 8pt;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         
         .day-content {
-            font-size: 8.5pt;
-            line-height: 1.4;
+            font-size: 7.5pt;
+            line-height: 1.35;
         }
         
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             flex: 1;
-            margin-top: 12px;
+            margin-top: 10px;
+            min-height: 0;
         }
         
         .column {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
+            min-height: 0;
         }
         
         .info-box {
             background: white;
             border: 1px solid #4a7c59;
-            padding: 10px;
-            flex: 1;
+            padding: 8px;
         }
         
         .info-box h3 {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: 700;
             color: #1a3d2e;
             border-bottom: 1px solid #c17c53;
-            padding-bottom: 4px;
-            margin-bottom: 6px;
+            padding-bottom: 3px;
+            margin-bottom: 5px;
         }
         
         .info-box ul {
-            font-size: 9pt;
-            line-height: 1.55;
+            font-size: 8pt;
+            line-height: 1.4;
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
         .info-box li {
-            margin-bottom: 3px;
-            padding-left: 12px;
+            margin-bottom: 2px;
+            padding-left: 10px;
             position: relative;
         }
         
@@ -154,10 +156,10 @@
         
         .highlight-box {
             background: #f5f2eb;
-            border-left: 3px solid #c17c53;
-            padding: 6px 10px;
-            margin-top: 6px;
-            font-size: 8.5pt;
+            border-left: 2px solid #c17c53;
+            padding: 4px 8px;
+            margin-top: 4px;
+            font-size: 7.5pt;
         }
         
         .highlight-label {
@@ -167,25 +169,25 @@
         
         .targets-row {
             display: flex;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 8px;
+            margin-top: 4px;
         }
         
         .target-item {
             flex: 1;
             background: #f5f2eb;
-            padding: 5px 8px;
-            font-size: 8.5pt;
+            padding: 4px 6px;
+            font-size: 7.5pt;
             border-left: 2px solid #4a7c59;
         }
         
         .checklist {
-            font-size: 8.5pt;
-            line-height: 1.6;
+            font-size: 7.5pt;
+            line-height: 1.45;
         }
         
         .checklist-item {
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         
         .section-title {
@@ -195,7 +197,7 @@
         
         @media print {
             body {
-                padding: 0.3in;
+                padding: 0.25in;
             }
         }
     </style>
@@ -335,7 +337,7 @@
                             <span class="highlight-label">Fermented:</span> 2+ servings
                         </div>
                     </div>
-                    <div class="highlight-box" style="margin-top: 8px;">
+                    <div class="highlight-box" style="margin-top: 6px;">
                         <span class="highlight-label">Fasted Training:</span> OK for Grant (coffee + electrolytes before noon). If afternoon crashes, delay caffeine 90-120 min after waking.
                     </div>
                 </div>
